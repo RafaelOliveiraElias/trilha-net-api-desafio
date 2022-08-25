@@ -97,7 +97,8 @@ namespace TrilhaApiDesafio.Controllers
 
             if (tarefaBanco == null)
                 return NotFound();
-
+            _context.Tarefas.Remove(tarefaBanco);
+            _context.SaveChanges();
             // TODO: Remover a tarefa encontrada através do EF e salvar as mudanças (save changes)
             return NoContent();
         }
