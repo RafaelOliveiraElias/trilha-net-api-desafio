@@ -32,7 +32,8 @@ namespace TrilhaApiDesafio.Controllers
         public IActionResult ObterTodos()
         {
             // TODO: Buscar todas as tarefas no banco utilizando o EF
-            return Ok();
+            var todos = _context.Tarefas.ToList();
+            return Ok(todos);
         }
 
         [HttpGet("ObterPorTitulo")]
@@ -40,7 +41,11 @@ namespace TrilhaApiDesafio.Controllers
         {
             // TODO: Buscar  as tarefas no banco utilizando o EF, que contenha o titulo recebido por parâmetro
             // Dica: Usar como exemplo o endpoint ObterPorData
-            return Ok();
+            var tarefas = _context.Tarefas.Where(x => x.Titulo.Contains(titulo));
+            
+            if (tarefas == null)
+                return NotFound();
+            return Ok(tarefas);
         }
 
         [HttpGet("ObterPorData")]
